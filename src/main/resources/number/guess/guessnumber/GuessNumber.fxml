@@ -9,7 +9,7 @@
 
 <AnchorPane id="scene" prefHeight="225.0" prefWidth="350.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="number.guess.guessnumber.Controler">
    <children>
-      <Label fx:id="resultDisplay" alignment="CENTER" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" text="Result" textAlignment="CENTER" textFill="#cccccc">
+      <Label fx:id="resultDisplay" alignment="CENTER" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="resultDisplay" text="Result" textAlignment="CENTER" textFill="#cccccc">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -18,7 +18,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField fx:id="userGuess" alignment="CENTER" layoutX="102.0" layoutY="124.0" />
+      <TextField fx:id="userGuessField" alignment="CENTER" layoutX="102.0" layoutY="124.0" />
       <Button id="guessButton" fx:id="guessButton" layoutX="145.0" layoutY="171.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" text="Guess">
          <font>
             <Font size="14.0" />

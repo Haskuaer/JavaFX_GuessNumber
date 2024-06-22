@@ -1,8 +1,11 @@
 #scene{
     -fx-background-color: #333333;
 }
-#resultDisplay{
+.resultDisplay{
     -fx-font-weight: bold;
+}
+.correct-guess{
+    -fx-text-fill: #00e600;
 }
 Button{
     -fx-text-fill: #cccccc;
