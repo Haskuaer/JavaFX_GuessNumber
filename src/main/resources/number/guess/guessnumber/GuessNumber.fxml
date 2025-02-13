@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="scene" prefHeight="225.0" prefWidth="350.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="number.guess.guessnumber.Controler">
+<AnchorPane id="scene" prefHeight="280.0" prefWidth="350.0" styleClass="scene" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="number.guess.guessnumber.Controler">
    <children>
-      <Label fx:id="resultDisplay" alignment="CENTER" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="resultDisplay" text="Result" textAlignment="CENTER" textFill="#cccccc">
+      <Label fx:id="resultDisplay" alignment="CENTER" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="result-display" text="Make a guess" textAlignment="CENTER" textFill="#cccccc">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -18,13 +18,37 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField fx:id="userGuessField" alignment="CENTER" layoutX="102.0" layoutY="124.0" />
-      <Button id="guessButton" fx:id="guessButton" layoutX="145.0" layoutY="171.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" text="Guess">
+      <TextField fx:id="userGuessField" alignment="CENTER" disable="true" layoutX="102.0" layoutY="124.0" />
+      <Button id="guessButton" fx:id="guessButton" disable="true" layoutX="145.0" layoutY="220.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="guess-button" text="Guess">
          <font>
             <Font size="14.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Button id="startButton" fx:id="startButton" layoutX="72.0" layoutY="171.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="start-button" text="Start">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button id="stopButton" fx:id="stopButton" disable="true" layoutX="221.0" layoutY="171.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="stop-button" text="Pause">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button id="stopButton" fx:id="resetButton" disable="true" layoutX="145.0" layoutY="171.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="reset-button" text="Reset">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

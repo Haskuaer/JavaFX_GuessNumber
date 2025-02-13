@@ -1,21 +1,61 @@
-#scene{
+.scene{
     -fx-background-color: #333333;
 }
-.resultDisplay{
+.result-display{
+    -fx-text-fill: #cccccc;
     -fx-font-weight: bold;
 }
 .correct-guess{
     -fx-text-fill: #00e600;
 }
-Button{
+.times-up{
+    -fx-text-fill: red;
+}
+.start-button{
+     -fx-text-fill: #cccccc;
+     -fx-background-color: #339900;
+     -fx-border-style: none;
+     -fx-border-radius: 5px;
+}
+.start-button:hover{
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-transition: 0.5s;
+}
+.reset-button{
+    -fx-text-fill: #cccccc;
+    -fx-background-color: #cc0000;
+    -fx-border-style: none;
+    -fx-border-radius: 5px;
+}
+.reset-button:hover{
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-transition: 0.5s;
+}
+.stop-button{
+    -fx-text-fill: #cccccc;
+    -fx-background-color: #0088cc;
+    -fx-border-style: none;
+    -fx-border-radius: 5px;
+}
+.stop-button:hover{
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-transition: 0.5s;
+}
+.guess-button{
     -fx-text-fill: #cccccc;
     -fx-background-color: #262626;
     -fx-border-style: none;
     -fx-border-radius: 5px;
 }
-Button:hover{
+.guess-button:hover{
     -fx-border-width: 1px;
     -fx-border-style: solid;
-    -fx-border-color: #00e600;
+    -fx-border-color: white;
     -fx-transition: 0.5s;
 }

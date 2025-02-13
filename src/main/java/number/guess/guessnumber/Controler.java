@@ -18,9 +18,17 @@ public class Controler {
     int numberToGuess;
     int guess;
     int numOfAttempts = 1;
-    int startTime = 60;
+    int startTime = 59;
+    Timeline timeline;
+    boolean gameStarted = false;
     @FXML
     private Button guessButton;
+    @FXML
+    private Button startButton;
+    @FXML
+    private Button resetButton;
+    @FXML
+    private Button stopButton;
     @FXML
     private TextField userGuessField;
     @FXML
@@ -31,32 +39,124 @@ public class Controler {
     @FXML
     public void initialize() {
 
-        numberToGuess = generateNumber();
-        System.out.println(numberToGuess);
-        timer();
+        startButton.setOnAction(event -> {
 
-        guessButton.setOnAction(event -> makeGuess());
+            if(!gameStarted) {
 
-        userGuessField.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER){
-                makeGuess();
+                numberToGuess = generateNumber();
+
+                startButton.setDisable(true);
+                resetButton.setDisable(false);
+                stopButton.setDisable(false);
+                guessButton.setDisable(false);
+                userGuessField.setDisable(false);
+
+                timer();
+                gameStarted = true;
+                resultDisplay.getStyleClass().remove("correct-guess");
+                resultDisplay.getStyleClass().remove("times-up");
+                resultDisplay.getStyleClass().add("result-display");
+                resultDisplay.setText("Make a guess");
+                numOfAttempts = 1;
+
+                guessButton.setOnAction(eve -> {
+                    makeGuess();
+                    userGuessField.setText("");
+                });
+
+                userGuessField.setOnKeyPressed(eve -> {
+                    if (eve.getCode() == KeyCode.ENTER) {
+                        makeGuess();
+                        userGuessField.setText("");
+                    }
+                });
+
+            } else {
+
+                startButton.setDisable(true);
+                stopButton.setDisable(false);
+                guessButton.setDisable(false);
+                userGuessField.setDisable(false);
+
+                startButton.setText("Start");
+
+                timeline.play();
+
             }
         });
+
+        resetButton.setOnAction(event -> reset());
+
+        stopButton.setOnAction(event -> stopTimer());
     }
 
     private void timer() {
-        Timeline timeline = new Timeline();
+
+        timeline = new Timeline();
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
             if (startTime > 0) {
-                System.out.println(startTime);
+                if(startTime < 10){
+                    timer.setText("00:0"+startTime);
+                } else {
+                    timer.setText("00:" + startTime);
+                }
                 startTime--;
             } else {
-                ((Timeline) event.getSource()).stop();
+
+                timer.setText("00:00");
+                resultDisplay.setText("Time's over!");
+
+                resultDisplay.getStyleClass().remove("result-display");
+                resultDisplay.getStyleClass().add("times-up");
+
+                guessButton.setDisable(true);
+                stopButton.setDisable(true);
+                userGuessField.setDisable(true);
+
+                gameStarted = false;
+                numOfAttempts = 1;
+                startTime = 59;
+
+                stopTimer();
             }
         });
+
         timeline.getKeyFrames().add(keyFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+    }
+
+    private void stopTimer() {
+        if (timeline != null) {
+
+            guessButton.setDisable(true);
+            stopButton.setDisable(true);
+            userGuessField.setDisable(true);
+
+            startButton.setDisable(false);
+
+            timeline.stop();
+        }
+    }
+
+    private void reset(){
+
+        if(timeline != null && gameStarted){
+
+            timeline.stop();
+
+            resultDisplay.setText("Correct number: " + numberToGuess);
+
+            startButton.setDisable(false);
+            resetButton.setDisable(true);
+            stopButton.setDisable(true);
+            guessButton.setDisable(true);
+            userGuessField.setDisable(true);
+
+            gameStarted = false;
+            numOfAttempts = 1;
+            startTime = 59;
+        }
     }
 
     private int generateNumber(){
@@ -73,8 +173,10 @@ public class Controler {
             return false;
         }
         try{
+
             Integer.parseInt(str);
             return true;
+
         } catch(NumberFormatException e){
             return false;
         }
@@ -88,20 +190,34 @@ public class Controler {
 
             guess = Integer.parseInt(input);
             if (guess == numberToGuess) {
+
                 resultDisplay.setText("You guessed correctly!\nAttempts: " + numOfAttempts);
+
+                resultDisplay.getStyleClass().remove("result-display");
                 resultDisplay.getStyleClass().add("correct-guess");
-            } else if (guess > numberToGuess) {
-                resultDisplay.setText("Too high");
+
+                resetButton.setDisable(true);
+                stopButton.setDisable(true);
+                guessButton.setDisable(true);
+                userGuessField.setDisable(true);
+
+                gameStarted = false;
+                numOfAttempts = 1;
+                startTime = 59;
+
+                stopTimer();
+
+            } else if (guess > numberToGuess && guess <= 100) {
+                resultDisplay.setText(guess +" is too high");
+                numOfAttempts++;
+            } else if (guess < numberToGuess && guess > 0) {
+                resultDisplay.setText(guess + " is too low");
                 numOfAttempts++;
             } else {
-                resultDisplay.setText("Too low");
-                numOfAttempts++;
+                resultDisplay.setText(guess + " is out of range");
             }
-
-        } else if(guess < 0) {
-            resultDisplay.setText("Only numbers from 1 to 100");
         } else {
-            resultDisplay.setText("Inserted number is not a number");
+            resultDisplay.setText("Inserted value is not a number");
         }
     }
 }
